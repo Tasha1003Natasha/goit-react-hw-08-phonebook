@@ -20,7 +20,12 @@ export const PrivateNavigation = () => {
               Home page
             </NavLink>
           </Navbar.Brand>
-          <Nav className="me-auto">
+          <Nav
+            className="me-auto"
+            style={{
+              fontSize: '20px',
+            }}
+          >
             <NavLink
               style={{ marginLeft: '200px' }}
               to="/contacts"

@@ -3,10 +3,10 @@ import { signIn, logIn, logOut, getRefresh } from './auth-operations';
 
 const initialState = {
   user: {
-    name: null,
-    email: null,
+    name: '',
+    email: '',
   },
-  token: null,
+  token: '',
   loading: false,
 };
 
@@ -24,8 +24,8 @@ const authSlice = createSlice({
       state.user = payload.user;
       state.loading = true;
     },
-    [logOut.fulfilled]: (state, { payload }) => {
-      state.token = null;
+    [logOut.fulfilled]: state => {
+      state.token = '';
       state.user = { name: '', email: '' };
       state.loading = false;
     },

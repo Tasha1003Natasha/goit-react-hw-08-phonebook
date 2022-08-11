@@ -19,7 +19,7 @@ export const signIn = createAsyncThunk('auth/register', async credentials => {
     console.log(data);
     return data;
   } catch (error) {
-    return error;
+    console.log(error);
   }
 });
 
@@ -48,7 +48,7 @@ export const getRefresh = createAsyncThunk(
   async (_, { getState, rejectWithValue }) => {
     const state = getState();
     const persistedToken = state.auth.token;
-    if (persistedToken === null) {
+    if (!persistedToken) {
       return rejectWithValue('Oops something went wrong');
     }
     tokenAuth.set(persistedToken);

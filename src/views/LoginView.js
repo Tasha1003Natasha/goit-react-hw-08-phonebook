@@ -35,7 +35,14 @@ const LoginView = () => {
 
   return (
     <>
-      <h1>Login View</h1>
+      <h1
+        style={{
+          textAlign: 'center',
+          marginTop: '10px',
+        }}
+      >
+        Login View
+      </h1>
       <Form
         onSubmit={handleSubmit}
         className="mb-3"
@@ -72,7 +79,7 @@ const LoginView = () => {
           />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Submit
+          Log In
         </Button>
       </Form>
     </>

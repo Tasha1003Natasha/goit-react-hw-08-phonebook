@@ -12,7 +12,6 @@ const RegisterView = () => {
 
   const handleChange = event => {
     const { value, name } = event.target;
-    console.log({ value, name });
 
     switch (name) {
       case 'name':
@@ -34,7 +33,7 @@ const RegisterView = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(signIn({ name, email, password }));
+    dispatch(signIn({ name, email }));
     setName('');
     setEmail('');
     setPassword('');
@@ -42,7 +41,14 @@ const RegisterView = () => {
 
   return (
     <>
-      <h1>Register View</h1>
+      <h1
+        style={{
+          textAlign: 'center',
+          marginTop: '10px',
+        }}
+      >
+        Register View
+      </h1>
       <Form
         onSubmit={handleSubmit}
         style={{
@@ -88,7 +94,7 @@ const RegisterView = () => {
           />
         </Form.Group>
         <Button variant="primary" type="submit">
-          Submit
+          Sign In
         </Button>
       </Form>
     </>
