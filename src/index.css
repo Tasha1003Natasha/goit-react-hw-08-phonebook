@@ -13,11 +13,11 @@ body {
   text-align: center;
   margin-left: auto;
   margin-right: auto;
-  background-image: url(./image.png);
-  background-repeat: no-repeat;
+  /* background-image: url(./image.png); */
+  /* background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  list-style: none;
+  list-style: none; */
 }
 
 code {
@@ -29,4 +29,12 @@ code {
 .title {
   color: #1e90ff;
   font-size: 40px;
+}
+
+.active {
+  color: white;
+}
+
+.nav-privat {
+  color: white;
 }

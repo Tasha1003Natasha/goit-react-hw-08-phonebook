@@ -1,12 +1,10 @@
 import React from 'react';
-import Ratio from 'react-bootstrap/Ratio';
-
 const HomeView = () => {
-  <div style={{ width: 660, height: 'auto' }}>
-    <Ratio aspectRatio="16x9">
-      <embed type="image/svg+xml" src="/TheresaKnott_castle.svg" />
-    </Ratio>
-  </div>;
+  return (
+    <div>
+      <h1>Welcome to the phonebook</h1>
+    </div>
+  );
 };
 
 export default HomeView;
