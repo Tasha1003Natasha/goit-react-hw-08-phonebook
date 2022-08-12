@@ -1,10 +1,12 @@
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import '../..//index.css';
 
 export const PublicNavigation = () => {
+  const location = useLocation();
+
   return (
     <>
       <Navbar bg="dark" variant="dark">
@@ -12,6 +14,7 @@ export const PublicNavigation = () => {
           <Navbar.Brand>
             <NavLink
               to="/"
+              state={{ from: location }}
               className={({ isActive }) => (isActive ? 'active' : 'nav')}
             >
               Home page
@@ -26,6 +29,7 @@ export const PublicNavigation = () => {
             <NavLink
               style={{ marginLeft: '200px' }}
               to="/login"
+              state={{ from: location }}
               className={({ isActive }) => (isActive ? 'active' : 'nav')}
             >
               Log In
@@ -34,6 +38,7 @@ export const PublicNavigation = () => {
             <NavLink
               style={{ marginLeft: '200px' }}
               to="/register"
+              state={{ from: location }}
               className={({ isActive }) => (isActive ? 'active' : 'nav')}
             >
               Sign In

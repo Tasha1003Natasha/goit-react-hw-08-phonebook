@@ -1,4 +1,4 @@
-@import-normalize; /* bring in normalize.css styles */
+/* @import-normalize; bring in normalize.css styles */
 
 body {
   margin: 0;
@@ -8,11 +8,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  padding: 20px 0;
+  /* padding: 20px 0;
   min-height: 800px;
   text-align: center;
   margin-left: auto;
-  margin-right: auto;
+  margin-right: auto; */
   /* background-image: url(./image.png); */
   /* background-repeat: no-repeat;
   background-size: cover;
@@ -36,5 +36,27 @@ code {
 }
 
 .nav-privat {
+  color: white;
+}
+
+.contacts-list {
+  padding: 20px 0;
+  min-height: 800px;
+  text-align: center;
+  margin-left: auto;
+  margin-right: auto;
+  background-image: url(./image.png);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  list-style: none;
+}
+
+.user__item {
+  list-style: none;
+  margin-right: 20px;
+}
+
+.user__link {
   color: white;
 }

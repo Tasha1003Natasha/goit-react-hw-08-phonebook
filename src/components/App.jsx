@@ -1,47 +1,69 @@
-// import { ContactForm } from './ContactForm/ContactForm';
-// import { ContactList } from './ContactList/ContactList';
-// import { Filter } from './Filter/Filter';
 import '../index.css';
-// import { useEffect } from 'react';
-// import { fetchContacts } from 'redux/contacts/contacts-operations';
-// import { useDispatch } from 'react-redux';
-///////////////////////////////////////////////////
 import { Routes, Route } from 'react-router-dom';
-import HomeView from 'views/HomeView';
-import RegisterView from 'views/RegisterView';
-import { Navigation } from './Navigation/Navigation';
-import ContactsView  from 'views/ContactsView';
-
-import LoginView from 'views/LoginView';
+import Navigation from './Navigation/Navigation';
+// import HomeView from 'views/HomeView';
+// import RegisterView from 'views/RegisterView';
+// import ContactsView from 'views/ContactsView';
+// import LoginView from 'views/LoginView';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { useDispatch } from 'react-redux';
+import { getRefresh } from 'redux/auth/auth-operations';
+import { useEffect } from 'react';
+import { PublicRoute } from './PublicRoute/PublicRoute';
+import { PrivateRoute } from './PrivateRoute/PrivateRoute';
+import { lazy, Suspense } from 'react';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+
+const HomeViewLazy = lazy(() => import('views/HomeView'));
+const RegisterViewLazy = lazy(() => import('views/RegisterView'));
+const LoginViewLazy = lazy(() => import('views/LoginView'));
+const ContactsViewLazy = lazy(() => import('views/ContactsView'));
 
 export const App = () => {
-  // const dispatch = useDispatch();
-  // /////////////////////////
-  // useEffect(() => {
-  //   dispatch(fetchContacts());
-  // }, [dispatch]);
+  const dispatch = useDispatch();
 
-  ///////////////////////////
-  // return (
-  //   <>
-  //     <h1 className="title">Phonebook</h1>
-  //     <ContactForm />
-  //     <h2 className="title">Contacts</h2>
-  //     <Filter />
-  //     <ContactList />
-  //   </>
-  // );
+  useEffect(() => {
+    dispatch(getRefresh());
+  }, [dispatch]);
 
   return (
-    <>
+    <Suspense fallback={<div>Loading...</div>}>
       <Navigation />
+      <ToastContainer />
       <Routes>
-        <Route path="/" element={<HomeView />} />
-        <Route path="/register" element={<RegisterView />} />
-        <Route path="/login" element={<LoginView />} />
-        <Route path="/contacts" element={<ContactsView />} />
+        <Route path="/" element={<HomeViewLazy />} />
+        {/* <Route path="/register" element={<RegisterViewLazy />} /> */}
+        {/* <Route path="/login" element={<LoginViewLazy />} /> */}
+        {/* <Route path="/contacts" element={<ContactsViewLazy />} /> */}
+
+        <Route
+          path="/register"
+          element={
+            <PublicRoute>
+              <RegisterViewLazy />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/login"
+          element={
+            <PublicRoute redirectTo="/contacts">
+              <LoginViewLazy />
+            </PublicRoute>
+          }
+        />
+
+        <Route
+          path="/contacts"
+          element={
+            <PrivateRoute>
+              <ContactsViewLazy />
+            </PrivateRoute>
+          }
+        />
       </Routes>
-    </>
+    </Suspense>
   );
 };

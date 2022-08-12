@@ -7,6 +7,7 @@ const initialState = {
     email: '',
   },
   token: '',
+  isLoggerIn: false,
   loading: false,
 };
 
@@ -17,21 +18,25 @@ const authSlice = createSlice({
     [signIn.fulfilled]: (state, { payload }) => {
       state.token = payload.token;
       state.user = payload.user;
-      state.loading = true;
+      state.isLoggerIn = true;
     },
     [logIn.fulfilled]: (state, { payload }) => {
       state.token = payload.token;
       state.user = payload.user;
+      state.isLoggerIn = true;
+      state.loading = false;
+    },
+    [logIn.pending]: state => {
       state.loading = true;
     },
     [logOut.fulfilled]: state => {
       state.token = '';
       state.user = { name: '', email: '' };
-      state.loading = false;
+      state.isLoggerIn = false;
     },
     [getRefresh.fulfilled]: (state, { payload }) => {
-      state.user = payload.user;
-      state.loading = true;
+      state.user = payload;
+      state.isLoggerIn = true;
     },
   },
 });

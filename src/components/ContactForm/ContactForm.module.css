@@ -1,5 +1,7 @@
 .form {
   font-size: 30px;
+  display: flex;
+  flex-direction: column;
 }
 
 .form__input {

@@ -1,13 +1,16 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { logIn } from 'redux/auth/auth-operations';
+import { toast } from 'react-toastify';
+import { Loader } from 'components/Loader/Loader';
 
 const LoginView = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const isLoading = useSelector(state => state.auth.loading);
 
   const handleChange = event => {
     const { value, name } = event.target;
@@ -28,6 +31,9 @@ const LoginView = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
+    if (email.trim() === '' || password.trim() === '') {
+      return toast.error('Please fill in all fields!');
+    }
     dispatch(logIn({ email, password }));
     setEmail('');
     setPassword('');
@@ -78,9 +84,12 @@ const LoginView = () => {
             style={{ width: '500px' }}
           />
         </Form.Group>
+
         <Button variant="primary" type="submit">
           Log In
         </Button>
+
+        {isLoading && <Loader />}
       </Form>
     </>
   );

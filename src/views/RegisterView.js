@@ -1,14 +1,17 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { signIn } from 'redux/auth/auth-operations';
+import { toast } from 'react-toastify';
+import { Loader } from 'components/Loader/Loader';
 
 const RegisterView = () => {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const dispatch = useDispatch();
+  const isLoading = useSelector(state => state.auth.loading);
 
   const handleChange = event => {
     const { value, name } = event.target;
@@ -33,7 +36,12 @@ const RegisterView = () => {
 
   const handleSubmit = event => {
     event.preventDefault();
-    dispatch(signIn({ name, email }));
+    if (name.trim() === '' || email.trim() === '' || password.trim() === '') {
+      return toast.error('Please fill in all fields!');
+    } else if (password.length < 7) {
+      return toast.info('Passwords must be at least 7 characters long!');
+    }
+    dispatch(signIn({ name, email, password }));
     setName('');
     setEmail('');
     setPassword('');
@@ -93,9 +101,11 @@ const RegisterView = () => {
             style={{ width: '500px' }}
           />
         </Form.Group>
+
         <Button variant="primary" type="submit">
           Sign In
         </Button>
+        {isLoading && <Loader />}
       </Form>
     </>
   );

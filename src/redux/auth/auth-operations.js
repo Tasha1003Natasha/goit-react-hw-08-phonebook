@@ -1,25 +1,15 @@
 import axios from 'axios';
 import { createAsyncThunk } from '@reduxjs/toolkit';
-
-axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
-
-const tokenAuth = {
-  set(token) {
-    axios.defaults.headers.common.Authorization = `Bearer ${token}`;
-  },
-  unset() {
-    axios.defaults.headers.common.Authorization = '';
-  },
-};
+import { tokenAuth } from 'API/API';
+import { toast } from 'react-toastify';
 
 export const signIn = createAsyncThunk('auth/register', async credentials => {
   try {
     const { data } = await axios.post('/users/signup', credentials);
     tokenAuth.set(data.token);
-    console.log(data);
     return data;
   } catch (error) {
-    console.log(error);
+    return toast.error('Oops something went wrong!');
   }
 });
 
@@ -27,10 +17,9 @@ export const logIn = createAsyncThunk('auth/login', async credentials => {
   try {
     const { data } = await axios.post('/users/login', credentials);
     tokenAuth.set(data.token);
-    console.log(data);
     return data;
   } catch (error) {
-    return error;
+    return toast.error('Oops something went wrong!');
   }
 });
 
@@ -39,12 +28,12 @@ export const logOut = createAsyncThunk('auth/logout', async credentials => {
     await axios.post('/users/logout', credentials);
     tokenAuth.unset();
   } catch (error) {
-    return error;
+    return toast.error('Oops something went wrong!');
   }
 });
 
 export const getRefresh = createAsyncThunk(
-  'auth/logout',
+  'auth/getRefresh',
   async (_, { getState, rejectWithValue }) => {
     const state = getState();
     const persistedToken = state.auth.token;
@@ -56,7 +45,7 @@ export const getRefresh = createAsyncThunk(
       const { data } = await axios.get('/users/current');
       return data;
     } catch (error) {
-      return error;
+      return toast.error('Oops something went wrong!');
     }
   }
 );
