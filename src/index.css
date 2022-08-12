@@ -60,3 +60,20 @@ code {
 .user__link {
   color: white;
 }
+
+.home {
+  height: 800px;
+  display: flex;
+  flex-direction: column;
+  background-image: url(./photo1.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+}
+
+.title-home {
+  margin-top: 50px;
+  color: #0000cd;
+  font-size: 40px;
+  margin-left: 80px;
+}
