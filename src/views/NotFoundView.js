@@ -15,7 +15,7 @@ const NotFoundView = () => {
       navigate('/login');
       return;
     }
-  });
+  }, [isLogin, navigate]);
 
   return (
     <div className="d-flex flex-column justify-content-center align-items-center">
