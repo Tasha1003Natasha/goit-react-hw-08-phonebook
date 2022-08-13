@@ -22,6 +22,7 @@ export const PrivateNavigation = () => {
               Home page
             </NavLink>
           </Navbar.Brand>
+
           <Nav
             className="me-auto"
             style={{
