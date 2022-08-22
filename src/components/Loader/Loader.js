@@ -1,8 +1,9 @@
 import React from 'react';
 import { Grid } from 'react-loader-spinner';
+import styles from './Loader.module.css';
 
 export const Loader = () => (
-  <div>
+  <div className={styles.loader}>
     <Grid
       color="#3f51b5"
       height={80}

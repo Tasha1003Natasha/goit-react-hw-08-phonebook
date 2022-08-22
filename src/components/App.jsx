@@ -14,6 +14,7 @@ import { PrivateRoute } from './PrivateRoute/PrivateRoute';
 import { lazy, Suspense } from 'react';
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { Loader } from './Loader/Loader';
 
 const HomeViewLazy = lazy(() => import('views/HomeView'));
 const RegisterViewLazy = lazy(() => import('views/RegisterView'));
@@ -29,7 +30,13 @@ export const App = () => {
   }, [dispatch]);
 
   return (
-    <Suspense fallback={<div>Loading...</div>}>
+    <Suspense
+      fallback={
+        <div>
+          <Loader />
+        </div>
+      }
+    >
       <Navigation />
       <ToastContainer />
       <Routes>
