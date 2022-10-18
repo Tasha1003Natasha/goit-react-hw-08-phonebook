@@ -1,6 +1,7 @@
 import axios from 'axios';
 
 axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+// axios.defaults.baseURL = 'https://db-contacts-project-1.herokuapp.com';
 
 export const tokenAuth = {
   set(token) {
